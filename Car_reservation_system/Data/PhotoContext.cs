@@ -1,39 +1,19 @@
-﻿using System.Diagnostics;
-using Car_reservation_system.Identity.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Car_reservation_system.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Car_reservation_system.Data
 {
-    [Authorize]
-    public class HomeController : Controller
+    public class PhotoContext : DbContext
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
+        public PhotoContext(DbContextOptions<PhotoContext> options)
+            : base(options)
         {
-            _logger = logger;
-            this._userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            ViewData["UserId"] = _userManager.GetUserId(this.User);
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public DbSet<Car_reservation_system.Models.Photo> Photo { get; set; } = default!;
     }
 }

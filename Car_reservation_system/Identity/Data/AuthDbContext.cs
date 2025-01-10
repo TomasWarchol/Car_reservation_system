@@ -2,6 +2,7 @@
 
 using Car_reservation_system.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Car_reservation_system.Identity.Data

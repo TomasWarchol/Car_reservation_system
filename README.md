@@ -106,6 +106,13 @@ Użytkownicy mogą wrócić do strony głównej, klikając przycisk **"Powrót d
 
 ---
 
+
+###
+Połączenia w bazie danych:
+
+![image](https://github.com/user-attachments/assets/8d4eeedf-83f4-4302-85ec-8f86b92066d0)
+
+
 ## Podsumowanie
 
 Aplikacja umożliwia zarządzanie flotą samochodów oraz ich wypożyczanie przez użytkowników. Administratorzy mają dodatkowe uprawnienia do zarządzania samochodami, co pozwala na efektywne zarządzanie zasobami.

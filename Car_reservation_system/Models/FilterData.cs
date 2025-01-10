@@ -1,0 +1,19 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Car_reservation_system.Models
+{
+    public class FilterData
+    {
+        public int ID { get; set; }
+
+        [Display(Name = "Marka pojazdu")]
+        public string VehicleBrand { get; set; }
+
+        [Display(Name = "Model pojazdu")]
+        public string CarModel { get; set; }
+
+        [Display(Name = "Generacja")]
+        public string Generation { get; set; }
+
+    }
+}

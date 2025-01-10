@@ -28,7 +28,7 @@ namespace Car_reservation_system.Repositories
         {
             var car = _context
                 .Cars
-                .SingleOrDefault(x => x.Id == carDto.Id) ?? throw new NotFoundException("Car not found.");
+                .SingleOrDefault(x => x.Id == carDto.Id) ?? throw new NotFoundException("Auto nie znalezione.");
 
             car.Category = carDto.Category;
             car.Make = carDto.Make;
@@ -39,7 +39,7 @@ namespace Car_reservation_system.Repositories
             car.Seats = carDto.Seats ??= 5;
             car.Doors = carDto.Doors ??= 5;
             car.Fuel = carDto.Fuel;
-            car.Transmission = carDto.Transmission ??= "Manual";
+            car.Transmission = carDto.Transmission ??= "Manualna";
             car.Description = carDto.Description;
             car.Available = carDto.Available;
             car.ImageUrl= carDto.ImageUrl;
@@ -50,14 +50,14 @@ namespace Car_reservation_system.Repositories
 
         public async Task DeleteCarAsync(int carId)
         {
-            var car = _context.Cars.SingleOrDefault(x => x.Id == carId) ?? throw new NotFoundException("Car not found");
+            var car = _context.Cars.SingleOrDefault(x => x.Id == carId) ?? throw new NotFoundException("Auto nie znalezione");
             await DeleteAsync(car);
         }
 
         public async Task RentCarAsync(int userId, int carId)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new NotFoundException("User not found");
-            var car = _context.Cars.SingleOrDefault(c => c.Id == carId) ?? throw new NotFoundException("Car not found");
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new NotFoundException("Użytkownik nie odnaleziony");
+            var car = _context.Cars.SingleOrDefault(c => c.Id == carId) ?? throw new NotFoundException("Auto nie znalezione");
 
             car.Available = false;
 
@@ -76,7 +76,7 @@ namespace Car_reservation_system.Repositories
         {
             var user = _context
                 .Users
-                .SingleOrDefault(u => u.Id == userId) ?? throw new NotFoundException("User not found");
+                .SingleOrDefault(u => u.Id == userId) ?? throw new NotFoundException("Użytkownik nie odnaleziony");
 
             var rentedCarInfo = _context
                 .RentInfo
@@ -100,17 +100,17 @@ namespace Car_reservation_system.Repositories
         {
             var user = _context
                 .Users
-                .SingleOrDefault(u => u.Id == userId) ?? throw new NotFoundException("User not found");
+                .SingleOrDefault(u => u.Id == userId) ?? throw new NotFoundException("Użytkownik nie odnaleziony");
 
             var car = _context
                 .Cars
-                .SingleOrDefault(c => c.Id == carId) ?? throw new NotFoundException("Car not found");
+                .SingleOrDefault(c => c.Id == carId) ?? throw new NotFoundException("Auto nie znalezione");
 
                 car.Available = true;
 
             var rentedInfo = _context
                 .RentInfo
-                .SingleOrDefault(x => x.UserId == user.Id && x.CarId == car.Id && x.IsGivenBack == false) ?? throw new BadRequestException("Oops something went wrong");
+                .SingleOrDefault(x => x.UserId == user.Id && x.CarId == car.Id && x.IsGivenBack == false) ?? throw new BadRequestException("Opps coś poszo nie tak");
             if (rentedInfo != null)
             {
                 rentedInfo.IsGivenBack = true;

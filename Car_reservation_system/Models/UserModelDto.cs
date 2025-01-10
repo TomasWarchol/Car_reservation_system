@@ -1,6 +1,4 @@
-﻿using Car_reservation_system.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Car_reservation_system.Models
@@ -8,44 +6,44 @@ namespace Car_reservation_system.Models
     public class UserModelDto
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "The Email field is required")]
+        [Required(ErrorMessage = "Email jest wymagany")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [DisplayName("New password")]
-        [MinLength(6, ErrorMessage = "Password must be a minimum length of '6'")]
+        [DisplayName("Nowe hasło")]
+        [MinLength(6, ErrorMessage = "Hasło musi mieć minimalną długość 6 znaków")]
         [DataType(DataType.Password)]
         public string? NewPassword { get; set; }
 
-        [DisplayName("Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        [DisplayName("Potwierdź nowe hasło")]
+        [Compare("NewPassword", ErrorMessage = "Hasło i potwierdzenie hasła muszą być takie same.")]
         [DataType(DataType.Password)]
         public string? ConfirmNewPassword { get; set; }
 
-        [DisplayName("First Name")]
-        [Required(ErrorMessage = "The First Name field is required")]
+        [DisplayName("Imię")]
+        [Required(ErrorMessage = "Pole Imię jest wymagane")]
         public string FirstName { get; set; }
 
-        [DisplayName("Last Name")]
-        [Required(ErrorMessage = "The Last Name field is required")]
+        [DisplayName("Nazwisko")]
+        [Required(ErrorMessage = "Pole Nazwisko jest wymagane")]
         public string LastName { get; set; }
 
-        [DisplayName("Phone number")]
+        [DisplayName("Numer telefonu")]
         [Phone, MaxLength(9)]
         public string? ContactNumber { get; set; }
 
-        [DisplayName("City")]
+        [DisplayName("Miasto")]
         public string? City { get; set; }
 
-        [DisplayName("Street")]
+        [DisplayName("Ulica")]
         public string? Street { get; set; }
 
-        [DisplayName("Postal code")]
+        [DisplayName("Kod pocztowy")]
         public string? PostalCode { get; set; }
 
         public string Role { get; set; }
 
-        [DisplayName("Rented Cars")]
+        [DisplayName("Wynajęte samochody")]
         public int NumberRentedCars { get; set; }
 
         public List<CarModelDto>? Cars { get; set; }

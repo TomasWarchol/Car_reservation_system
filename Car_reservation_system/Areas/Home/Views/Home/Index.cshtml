@@ -4,26 +4,26 @@
 <h1 class="text-center">Wypożyczalnia aut</h1>
 
 <div class="row pb-3">
-    @foreach(var car in Model)
+    @foreach(var cars in Model)
     {
         <div class="col-lg-4 col-md-6">
             <div class="row p-2">
                 <div class="col-12 p-1">
                     <div class="card">
-                        <img src="@car.ImageUrl" class="card-img-top" height="220"/>
+                        <img src="@cars.ImageUrl" class="card-img-top" height="220"/>
 
                        <div class="card-body">
                            <div class="text-black" style="text-align:center; font-size:20px;">
-                                <p><b>@car.Make @car.Model</b></p>
+                                <p><b>@cars.Make @cars.Model</b></p>
                            </div>
                             <table style="width:100%">
                                 <tr>
-                                    <td> <i class="bi bi-fire"></i>&nbsp; Engine</td>
-                                    <td><b>@car.Engine</b></td>
+                                    <td> <i class="bi bi-fire"></i>&nbsp;  Pojemność silnika</td>
+                                    <td><b>@cars.Engine</b></td>
                                 </tr>
                                 <tr>
-                                    <td><i class="bi bi-lightning-fill"></i> &nbsp; HP</td>
-                                    <td><b>@car.Horsepower</b></td>
+                                    <td><i class="bi bi-lightning-fill"></i> &nbsp; Konie mechaniczne</td>
+                                    <td><b>@cars.Horsepower</b></td>
                                 </tr>
                                 <tr>
                                     <td><i class="bi bi-stopwatch-fill"></i> &nbsp; 0-100 km/h</td>
@@ -32,7 +32,8 @@
                             </table>
                         </div>
                         <div>
-                            <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-info form-control">Details</a>
+                            <a asp-controller="Cars" asp-action="Details" asp-route-id="@cars.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-info form-control">Szczegóły</a>
+
                         </div>
                     </div>
                 </div>

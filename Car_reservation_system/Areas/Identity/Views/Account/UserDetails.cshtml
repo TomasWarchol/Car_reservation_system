@@ -4,7 +4,7 @@
     ViewData["Title"] = "UserInfoDetails";
 }
 
-<h1>User info details</h1>
+<h1>Informację o użytkownikach</h1>
 
 <div>
     <hr />
@@ -110,7 +110,7 @@
                     </td>
                     <td>
                         <a asp-area="Home" asp-controller="Cars" asp-action="Details" asp-route-id="@item.Id"
-                            asp-route-returnUrl="@Context.Request.Path?userId=@Model.Id&returnUrl=%2FIdentity%2FAccount%2FUsers" class="btn btn-info">Details</a>
+                            asp-route-returnUrl="@Context.Request.Path?userId=@Model.Id&returnUrl=%2FIdentity%2FAccount%2FUsers" class="btn btn-info">Szczegóły</a>
                     </td>
                 </tr>
             }

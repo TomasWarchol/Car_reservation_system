@@ -8,44 +8,55 @@ namespace Car_reservation_system.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Category is required")]
+        [Required(ErrorMessage = "Kategoria jest wymagana")]
+        [Display(Name = "Kategoria")]
         public string Category { get; set; }
 
-        [Required(ErrorMessage = "Make is required")]
+        [Required(ErrorMessage = "Marka jest wymagana")]
+        [Display(Name = "Marka")]
         public string Make { get; set; }
 
-        [Required(ErrorMessage = "Model is required")]
+        [Required(ErrorMessage = "Model jest wymagany")]
+        [Display(Name = "Model")]
         public string Model { get; set; }
 
-        [Required(ErrorMessage = "Engine capacity is required")]
+        [Required(ErrorMessage = "Pojemność silnika jest wymagana")]
+        [Display(Name = "Pojemność silnika")]
         public decimal? Engine { get; set; }
 
-        [Required(ErrorMessage = "Horsepower is required")]
+        [Required(ErrorMessage = "Konie mechaniczne są wymagane")]
+        [Display(Name = "Konie mechaniczne")]
         public int? Horsepower { get; set; }
 
-        [Required(ErrorMessage = "The year of the car is required")]
-        [Range(1886, 2023)]
+        [Required(ErrorMessage = "Rocznik jest wymagany")]
+        [Display(Name = "Rocznik")]
+        [Range(1886, 2025)]
         public int? Year { get; set; }
 
-        [Required(ErrorMessage = "The number of seats is required")]
+        [Required(ErrorMessage = "Ilość siedzień jest wymagana")]
+        [Display(Name = "Ilość siedzień")]
         public int? Seats { get; set; }
 
-        [Required(ErrorMessage = "The number of doors is required")]
+        [Required(ErrorMessage = "Ilość drzwi jest wymagana")]
+        [Display(Name = "Ilość drzwi")]
         public int? Doors { get; set; }
 
-        [Required(ErrorMessage = "Car fuel is required")]
+        [Required(ErrorMessage = "Pojemność paliwa jest wymagana")]
+        [Display(Name = "Paliwo")]
         public string? Fuel { get; set; }
 
-        [Required(ErrorMessage = "The transmission is required")]
+        [Required(ErrorMessage = "Transmisja jest wymagana")]
+        [Display(Name = "Skrzynia biegów")]
         public string? Transmission { get; set; }
 
-        [DisplayName("Description:")]
+        [DisplayName("Opis:")]
         public string? Description { get; set; }
 
+        [Display(Name = "Dostępność")]
         public bool Available { get; set; }
 
-        [Required(ErrorMessage = "The image is required")]
-        [DisplayName("Image:")]
+        [Required(ErrorMessage = "Zdjęcie jest wymagane")]
+        [DisplayName("Zdjęcie:")]
         [ValidateNever]
         public string ImageUrl { get; set; }
     }

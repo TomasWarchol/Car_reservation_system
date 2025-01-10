@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace Car_reservation_system.Entities
 {
@@ -7,6 +8,7 @@ namespace Car_reservation_system.Entities
         public int Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
         public string PasswordHash { get; set; }
         public string? ContactNumber { get; set; }

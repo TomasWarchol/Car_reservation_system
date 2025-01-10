@@ -7,7 +7,7 @@
 
 @if (Model != null)
 {
-    <h1>Rented Cars</h1>
+    <h1>Wypożyczone auta</h1>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -67,8 +67,8 @@
                         @Html.DisplayFor(modelItem => item.Transmission)
                     </td>
                     <td>
-                        @Html.ActionLink("Details", "Details", "Cars", new { id=item.Id, returnUrl=Context.Request.Path }, new{@class="btn btn-info"})
-                        @Html.ActionLink("Give Back", "GiveBackCar", new { carId=item.Id }, 
+                        @Html.ActionLink("Szczegóły", "Details", "Cars", new { id=item.Id, returnUrl=Context.Request.Path }, new{@class="btn btn-info"})
+                        @Html.ActionLink("Zwróć auto", "GiveBackCar", new { carId=item.Id }, 
                                                                      new {@class="btn btn-warning"})
                     </td>
                 </tr>
@@ -78,5 +78,5 @@
 }
 else
 {
-    <h3>No rented cars ----> <a asp-area="Home" asp-controller="Cars" asp-action="Index">Rent a car</a></h3>
+    <h3>Brak aut do wypożyczenia ----> <a asp-area="Home" asp-controller="Cars" asp-action="Index">Wypożycz auto</a></h3>
 }

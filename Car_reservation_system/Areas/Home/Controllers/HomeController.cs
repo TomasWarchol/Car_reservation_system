@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 
-namespace Car_reservation_system.Areas.Home.Controllers
+namespace Car_Rental_MVC.Areas.Home.Controllers
 {
 
     [Authorize]

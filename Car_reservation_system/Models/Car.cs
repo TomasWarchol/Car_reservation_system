@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Car_reservation_system.Identity.Data;
 
-namespace CarRentalHub.Models
+namespace Car_reservation_system.Models
 {
     public class Car
     {

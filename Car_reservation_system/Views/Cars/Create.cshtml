@@ -1,0 +1,334 @@
+﻿@model Car_reservation_system.Models.Car
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<body>
+
+    <style>
+        .custom-select-height {
+            height: 60px;
+        }
+
+        .header-gradient {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 90px; /* Wysokość gradientu */
+            background: linear-gradient(to bottom right, #0077cc, #004466); /* Gradient diagonalny w odcieniach niebieskiego */
+        }
+    </style>
+
+    <div class="header-gradient"></div>
+
+    <style>
+        #imagePreview {
+            display: flex;
+            justify-content: center; /* Wyśrodkuj horyzontalnie */
+            align-items: center; /* Wyśrodkuj wertykalnie */
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+            #imagePreview img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px; /* Zaokrąglanie pojedynczego obrazu */
+                margin: 0 5px; /* Dodaj odstęp między zdjęciami */
+            }
+
+
+</style>
+
+<h1>Dodaj ogłoszenie</h1>
+
+<hr />
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-5">  
+                <div class="form-group">
+                        <div class="col-md-7 mb-3">
+                            <label asp-for="VehicleBrand" class="control-label"></label>
+                            <select asp-for="VehicleBrand" asp-items="@ViewBag.DostepneMarki" id="selectedMarka" class="form-control custom-select" style="height: 60px;">
+                                <option value="" selected>Wybierz markę</option>
+                            </select>
+                            <span asp-validation-for="VehicleBrand" class="text-danger"></span>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <div class="col-md-7 mb-3">
+                            <label asp-for="CarModel" class="control-label"></label>
+                            <select asp-for="CarModel" asp-items="@ViewBag.DostepneModele" id="selectedModel" class="form-control custom-select" style="height: 60px;">
+                                <option value="" selected>Wybierz model</option>
+                            </select>
+                            <span asp-validation-for="CarModel" class="text-danger"></span>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <div class="col-md-7 mb-3">
+                            <label asp-for="Generation" class="control-label"></label>
+                            <select asp-for="Generation" asp-items="@ViewBag.DostepneGeneracje" id="selectedGeneration" class="form-control custom-select" style="height: 60px;">
+                                <option value="" selected>Wybierz generację</option>
+                            </select>
+                            <span asp-validation-for="Generation" class="text-danger"></span>
+                        </div>                
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7 mb-3">
+                        <label asp-for="BodyType" class="control-label"></label>
+                            <select asp-for="BodyType" asp-items="@ViewBag.BodyType" class="form-control" style="height: 60px;">
+                            <option value="" selected>Typ nadwozia</option>
+                        </select>
+                        <span asp-validation-for="BodyType" class="text-danger"></span>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <div class="col-md-7 mb-3">
+                            <label asp-for="YearOfProduction" class="control-label"></label>
+                            <div>
+                                @Html.DropDownListFor(model => model.YearOfProduction, new SelectList(Model.YearsList), "Wybierz rok", new { @class = "form-control custom-select-height" })
+                                <span asp-validation-for="YearOfProduction" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-7 mb-3">
+                            <label asp-for="FuelType" class="control-label"></label>
+                            <select asp-for="FuelType" asp-items="@ViewBag.FuelType" class="form-control" style="height: 60px;">
+                                <option value="" selected>Typ paliwa</option>
+                            </select>
+                            <span asp-validation-for="FuelType" class="text-danger"></span>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-md-7 mb-3">
+                        <label asp-for="Mileage" class="control-label"></label>
+                        <input asp-for="Mileage" class="form-control" style="height: 60px;" pattern="\d+" title="Wprowadź liczbę całkowitą" oninput="validateInput(this)" />
+                        <span asp-validation-for="Mileage" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-7 mb-3">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" style="height: 60px;" pattern="\d+" title="Wprowadź liczbę całkowitą" oninput="validateInput(this)" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Photos" class="control-label"></label>
+                    <input type="file" name="Photos" id="photoInput" multiple onchange="previewImages()" />
+                    <span asp-validation-for="Photos" class="text-danger"></span>
+                </div>
+            <div id="imagePreview" class="row" onclick="handleThumbnailClick()"></div>
+                <div id="selectedPhoto" class="row mt-3">
+                    <label>Wybrane zdjęcie główne:</label>
+                </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+    <input type="hidden" id="selectedFileName" name="selectedFileName" />
+</form>
+
+    <div style="margin-top: 10px;">
+        <a asp-controller="FilterData" asp-action="Index">Powrót do strony głównej</a>
+    </div>
+
+
+<script>
+    function validateInput(input) {
+        // Usuń znaki inne niż cyfry
+        input.value = input.value.replace(/[^\d]/g, '');
+    }
+</script>
+
+<script>
+    var selectedFileId = null;
+    //var selectedFileName = null;
+
+    function previewImages() {
+        var preview = document.getElementById("imagePreview");
+        var files = document.getElementById("photoInput").files;
+
+        preview.innerHTML = "";
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.onload = (function (file, i) {
+                return function (e) {
+                    var fileId = "photo_" + i;
+                    var colDiv = document.createElement("div");
+                    colDiv.className = "col-md-4";
+                    colDiv.style = "padding: 10px";
+                    var img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.className = "img-thumbnail";
+                    img.style = "padding: 0px;";
+                    img.setAttribute("data-file-id", fileId);
+
+                    // Ustaw atrybut "data-file-name"
+                    img.setAttribute("data-file-name", file.name);
+
+                    colDiv.appendChild(img);
+                    preview.appendChild(colDiv);
+
+                    if (i === 0) {
+                        // Ustaw pierwsze zdjęcie jako domyślnie wybrane
+                        selectedFileId = fileId;
+                        img.classList.add("selected");
+                            img.style = "padding: 0px; max-width: 100%; height: auto;";
+                        displaySelectedPhoto(fileId);
+                    }
+                };
+            })(file, i);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    function handleThumbnailClick() {
+            var clickedElement = event.target;
+
+            // Sprawdź, czy kliknięty element to obraz
+        if (clickedElement.tagName === 'IMG') {
+            var thumbnails = document.getElementsByClassName("img-thumbnail");
+
+            for (var j = 0; j < thumbnails.length; j++) {
+                thumbnails[j].classList.remove("selected");
+            }
+
+            var clickedThumbnail = event.target;
+            clickedThumbnail.classList.add("selected");
+            selectedFileId = clickedThumbnail.getAttribute("data-file-id");
+            var SelectedFileName = clickedThumbnail.getAttribute("data-file-name");
+
+            console.log("SelectedFileName in JavaScript: ", SelectedFileName);
+
+
+            // Wywołaj funkcję wyświetlającą wybrane zdjęcie
+            displaySelectedPhoto(selectedFileId);
+
+            //document.getElementById("SelectedFileName").value = SelectedFileName;
+            var selectedFileNameInput = document.getElementById("selectedFileName");
+            if (selectedFileNameInput) {
+                // Ustaw wartość pola ukrytego w formularzu
+                selectedFileNameInput.value = SelectedFileName;
+
+                // ... pozostała część funkcji ...
+            } else {
+                console.error("Element with id 'SelectedFileName' not found!");
+            }
+
+            // Ustaw ukryte pole z identyfikatorem wybranego zdjęcia
+            document.getElementById("selectedPhotoId").value = selectedFileId;
+        }
+    }
+
+    function displaySelectedPhoto(fileId) {
+        var selectedPhotoDiv = document.getElementById("selectedPhoto");
+        selectedPhotoDiv.innerHTML = "";
+
+        // Dodaj etykietę "Wybrane zdjęcie główne"
+        var label = document.createElement("label");
+        label.textContent = "Wybrane zdjęcie główne:";
+        selectedPhotoDiv.appendChild(label);
+
+        var selectedPhoto = document.createElement("img");
+        selectedPhoto.src = document.querySelector('[data-file-id="' + fileId + '"]').src;
+        selectedPhoto.className = "img-thumbnail";
+            selectedPhoto.style = "padding: 0px;  border-radius: 10px;";
+        selectedPhotoDiv.appendChild(selectedPhoto);
+    }
+
+
+    
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Obsługa zdarzenia zmiany wyboru dla selectedMarka
+        $('#selectedMarka').change(function () {
+            // Pobierz wartość wybranej marki
+            var selectedMarka = $(this).val();
+
+            // Jeśli wybrano markę, usuń domyślną opcję
+            if (selectedMarka) {
+                $('#selectedMarka option[value=""]').remove();
+            }
+
+            // Wywołaj akcję w kontrolerze, aby uzyskać modele dla danej marki
+            $.getJSON('/FilterData/PobierzModele', { marka: selectedMarka }, function (data) {
+                // Wyczyść istniejące opcje w selectedModel
+                $('#selectedModel').empty();
+
+                // Dodaj domyślną opcję do selectedModel
+                $('#selectedModel').append($('<option>', {
+                    value: '',
+                    text: 'Wybierz model'
+                }));
+
+                // Dodaj nowe opcje do selectedModel
+                $.each(data, function (index, model) {
+                    $('#selectedModel').append($('<option>', {
+                        value: model,
+                        text: model
+                    }));
+                });
+            });
+        });
+
+        // Obsługa zdarzenia zmiany wyboru dla selectedModel
+        $('#selectedModel').change(function () {
+            // Pobierz wartość wybranego modelu
+            var selectedModel = $(this).val();
+
+            // Jeśli wybrano model, usuń domyślną opcję
+            if (selectedModel) {
+                $('#selectedModel option[value=""]').remove();
+            }
+
+            // Wywołaj akcję w kontrolerze, aby uzyskać generacje dla danego modelu
+            $.getJSON('/FilterData/GetGeneration', { carModel: selectedModel }, function (data) {
+                // Wyczyść istniejące opcje w selectedGeneration
+                $('#selectedGeneration').empty();
+
+                // Dodaj domyślną opcję do selectedGeneration
+                $('#selectedGeneration').append($('<option>', {
+                    value: '',
+                    text: 'Wybierz generację'
+                }));
+
+                // Dodaj nowe opcje do selectedGeneration
+                $.each(data, function (index, generation) {
+                    $('#selectedGeneration').append($('<option>', {
+                        value: generation,
+                        text: generation
+                    }));
+                });
+            });
+        });
+
+        // Wywołaj zdarzenie zmiany po załadowaniu strony, aby zainicjować dostępne modele
+        $('#selectedMarka').change();
+
+        // Wywołaj zdarzenie zmiany po załadowaniu strony, aby zainicjować dostępne generacje
+        $('#selectedModel').change();
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+</body>

@@ -1,0 +1,437 @@
+﻿@model IEnumerable<Car_reservation_system.Models.FilterData>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<styles>
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    }
+
+    .overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    }
+
+    .loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+
+    /* Dodaj dodatkowe style dla reszty strony */
+    .content {
+    /* Dodaj odpowiednie style dla reszty zawartości strony */
+    }
+
+</styles>
+
+<!-- Dodaj overlay i animację ładowania -->
+<div id="overlay" class="overlay">
+    <div class="loader"></div>
+</div>
+
+<script>
+    // Funkcja do pokazania overlaya z animacją ładowania
+function showLoader() {
+    document.getElementById('overlay').style.display = 'flex';
+}
+
+// Funkcja do ukrycia overlaya po zakończeniu ładowania
+function hideLoader() {
+    document.getElementById('overlay').style.display = 'none';
+}
+
+// Wywołaj funkcję showLoader() przed przekierowaniem
+showLoader();
+
+// Wywołaj funkcję hideLoader() po załadowaniu strony
+window.onload = function() {
+    hideLoader();
+};
+
+</script>
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        /* overflow: hidden; */
+    }
+
+    .header-containerr {
+
+        width: 100%;
+        height: 20px;
+        overflow: hidden;
+    }
+
+    .header-gradient {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 90%; /* Wysokość gradientu */
+        background: linear-gradient(to bottom right, #0077cc, #004466); /* Gradient diagonalny w odcieniach niebieskiego */
+    }
+
+    .header-shape {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        transform: translateY(90%);
+        margin-bottom: 500px;
+        background: transparent; /* Ustawienie tła na przeźroczyste */
+    }
+
+        .header-shape svg {
+            width: 100%;
+            height: 100%;
+            fill: white; /* Wyłączenie fill (wypełnienia) dla SVG */
+        }
+
+ 
+</style>
+
+<!-- Section 1 -->
+<div class="header-containerr">
+    <div class="header-gradient"></div>
+    <div class="header-shape wp-block-mailpoet-blocks-container wp-block-mailpoet-home-header diagonal-radient-2 seperator-absolute-bottom">
+        <svg preserveAspectRatio="none" viewBox="0 0 1320 235" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1320,0c-177,0.3-385.1,41.199-624.199,122.8C456.7,204.399,224.7,235.8,0,216.899v17.2h1320V0z"></path>
+        </svg>
+        <div class="wp-block-columns has-2-columns">
+            <!-- Pozostała treść sekcji 1 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Funkcja sprawdzająca i aktualizująca wysokość .header-gradient
+    function updateHeaderGradientHeight() {
+        var headerGradient = document.querySelector('.header-gradient');
+        var headerShape = document.querySelector('.header-shape')
+
+        if (window.innerWidth < 768) {
+            headerGradient.style.height = '100%';
+            headerShape.style.transform = 'translateY(200%)';
+        } 
+        else if (window.innerWidth < 1700) {
+            headerGradient.style.height = '94%';
+        }
+        else {
+            headerGradient.style.height = '90%';
+        }
+    }
+
+    function updateHeroSection() {
+        var heroSection = document.querySelector('.hero-section');
+
+        if (window.innerWidth < 768) {
+            heroSection.style.marginTop = '-230px';
+        }
+        else if (window.innerWidth < 1700) {
+            heroSection.style.marginTop = '-175px';
+        }
+        // else {
+        //     heroSection.style.margin - top = '90%';
+        // }
+    }
+
+    // Wywołaj funkcję po załadowaniu strony
+    document.addEventListener('DOMContentLoaded', function () {
+        // Wywołaj funkcję na starcie
+        updateHeaderGradientHeight();
+        updateHeroSection();
+
+        // Dodaj nasłuchiwanie na zmiany rozmiaru okna
+        window.addEventListener('resize', function () {
+            // Ponownie wywołaj funkcję przy zmianie rozmiaru okna
+            updateHeaderGradientHeight();
+            updateHeroSection();
+        });
+    });
+</script>
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .hero-section {
+        background: linear-gradient(to bottom, #3498db, #2980b9);
+        color: #fff;
+        padding: 50px 10px;
+        border-radius: 20px;
+        margin-top: -140px;
+        margin-bottom: 20px;
+        margin-left: 30px;
+        margin-right: 30px;
+        text-align: center;
+        position: relative; /* Dodaj pozycję względną do sekcji hero-section */
+        transform: scale(0.8);
+    }
+
+    .custom-button {
+        font-size: 1.3rem;
+        font-weight: 300;
+        padding: 12px 25px;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .custom-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+    .form-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .logo-container {
+        position: relative;
+        margin-bottom: 0px; /* Dodaj margines od dolu dla logo */
+    }
+
+    .logo {
+        max-width: 10%;
+        max-height: 10%;
+        display: inline-block; /* Ustaw jako element blokowy, aby móc kontrolować marginesy */
+        vertical-align: middle; /* Wyśrodkuj w pionie */
+    }
+
+</style>
+
+<div class="hero-section">
+
+    <div class="logo-container">
+        <img src="~/Logo/Car.png" alt="Car Logo" class="logo" />
+    </div>
+
+    <div class="container text-center">
+
+        <h2 class="text-center mb-5 display-4 mb">Znajdź swój samochód!</h2>
+
+        <form asp-controller="Cars" asp-action="Index" method="get">
+
+            <div class="row">
+                <!-- Pierwszy rząd -->
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedMarka" class="form-label">Marka pojazdu:</label> *@
+                    <select id="selectedMarka" name="selectedMarka" class="form-control custom-select" style="height: 60px;">
+                        <option value="" selected>Wybierz markę</option>
+                        @if (ViewBag.DostepneMarki != null)
+                        {
+                            foreach (var marka in ViewBag.DostepneMarki)
+                            {
+                                <option value="@marka.Value">@marka.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedModel" class="form-label">Model pojazdu:</label> *@
+                    <select id="selectedModel" name="selectedModel" class="form-control custom-select" style="height: 60px;">
+                        <!-- Modele zostaną automatycznie uzupełnione po zmianie wybranej marki -->
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedGeneration" class="form-label">Generacja:</label> *@
+                    <select id="selectedGeneration" name="selectedGeneration" class="form-control custom-select" style="height: 60px;">
+                        <!-- Modele zostaną automatycznie uzupełnione po zmianie wybranej marki -->
+                    </select>
+                </div>
+
+                <!-- Drugi rząd -->
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedYearFrom" class="form-label">Rok produkcji od:</label> *@
+                    <select id="selectedYearFrom" name="selectedYearFrom" class="form-control custom-select" style="height: 60px;">
+                        <option value="" selected>Rok produkcji od</option>
+                        @foreach (var year in ViewBag.AvailableYears)
+                        {
+                            <option value="@year">@year</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedYearTo" class="form-label">Rok produkcji do:</label> *@
+                    <select id="selectedYearTo" name="selectedYearTo" class="form-control custom-select" style="height: 60px;">
+                        <option value="" selected>Rok produkcji do</option>
+                        @foreach (var year in ViewBag.AvailableYears)
+                        {
+                            <option value="@year">@year</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedBodyType" class="form-label">Typ nadwozia:</label> *@
+                    <select id="selectedBodyType" name="selectedBodyType" class="form-control custom-select" style="height: 60px;">
+                        <option value="" selected>Typ nadwozia</option>
+                        @foreach (var bodyType in ViewBag.BodyType)
+                        {
+                            <option value="@bodyType">@bodyType</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Trzeci rząd -->
+                <div class="col-md-4 mb-3">
+                    @* <label for="selectedFuelType" class="form-label">Typ paliwa:</label> *@
+                    <select id="selectedFuelType" name="selectedFuelType" class="form-control custom-select" style="height: 60px;">
+                        <option value="" selected>Typ paliwa</option>
+                        @foreach (var fuelType in ViewBag.FuelType)
+                        {
+                            <option value="@fuelType">@fuelType</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="MileageFrom" class="form-label">Przebieg od: (km)</label> *@
+                    <input id="MileageFrom" name="MileageFrom" class="form-control custom-select" style="height: 60px;" placeholder="Przebieg od (km)">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="MileageTo" class="form-label">Przebieg do: (km)</label> *@
+                    <input id="MileageTo" name="MileageTo" class="form-control custom-select" style="height: 60px;" placeholder="Przebieg do (km)">
+                </div>
+
+                <!-- Czwarty rząd -->
+                <div class="col-md-4 mb-3">
+                    @* <label for="PriceFrom" class="form-label">Cena od: (PLN)</label> *@
+                    <input id="PriceFrom" name="PriceFrom" class="form-control custom-select" style="height: 60px;" placeholder="Cena od (PLN)">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    @* <label for="PriceTo" class="form-label">Cena do: (PLN)</label> *@
+                    <input id="PriceTo" name="PriceTo" class="form-control custom-select" style="height: 60px;" placeholder="Cena do (PLN)">
+                </div>
+
+                <!-- Przycisk Szukaj -->
+                <div class="col-md-12 text-center mt-4">
+                    <button type="submit" class="custom-button">Szukaj
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search search-icon" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Obsługa zdarzenia zmiany wyboru dla selectedMarka
+        $('#selectedMarka').change(function () {
+            // Pobierz wartość wybranej marki
+            var selectedMarka = $(this).val();
+
+            // Jeśli wybrano markę, usuń domyślną opcję
+            if (selectedMarka) {
+                $('#selectedMarka option[value=""]').remove();
+            }
+
+            // Wywołaj akcję w kontrolerze, aby uzyskać modele dla danej marki
+            $.getJSON('/FilterData/PobierzModele', { marka: selectedMarka }, function (data) {
+                // Wyczyść istniejące opcje w selectedModel
+                $('#selectedModel').empty();
+
+                // Dodaj domyślną opcję do selectedModel
+                $('#selectedModel').append($('<option>', {
+                    value: '',
+                    text: 'Wybierz model'
+                }));
+
+                // Dodaj nowe opcje do selectedModel
+                $.each(data, function (index, model) {
+                    $('#selectedModel').append($('<option>', {
+                        value: model,
+                        text: model
+                    }));
+                });
+            });
+        });
+
+        // Obsługa zdarzenia zmiany wyboru dla selectedModel
+        $('#selectedModel').change(function () {
+            // Pobierz wartość wybranego modelu
+            var selectedModel = $(this).val();
+
+            // Jeśli wybrano model, usuń domyślną opcję
+            if (selectedModel) {
+                $('#selectedModel option[value=""]').remove();
+            }
+
+            // Wywołaj akcję w kontrolerze, aby uzyskać generacje dla danego modelu
+            $.getJSON('/FilterData/GetGeneration', { carModel: selectedModel }, function (data) {
+                // Wyczyść istniejące opcje w selectedGeneration
+                $('#selectedGeneration').empty();
+
+                // Dodaj domyślną opcję do selectedGeneration
+                $('#selectedGeneration').append($('<option>', {
+                    value: '',
+                    text: 'Wybierz generację'
+                }));
+
+                // Dodaj nowe opcje do selectedGeneration
+                $.each(data, function (index, generation) {
+                    $('#selectedGeneration').append($('<option>', {
+                        value: generation,
+                        text: generation
+                    }));
+                });
+            });
+        });
+
+        // Wywołaj zdarzenie zmiany po załadowaniu strony, aby zainicjować dostępne modele
+        $('#selectedMarka').change();
+
+        // Wywołaj zdarzenie zmiany po załadowaniu strony, aby zainicjować dostępne generacje
+        $('#selectedModel').change();
+    });
+</script>

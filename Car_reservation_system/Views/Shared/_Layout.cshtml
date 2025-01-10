@@ -1,398 +1,60 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using Car_reservation_system.Identity.Data
-
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
-@{
-    var userIsLoggedIn = UserManager.GetUserId(User) != null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AutoRent</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <title>@ViewData["Title"]  Wypożczalnia aut</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CarRentalHub.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@3.1.0/daterangepicker.css" />
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-
-
-    @* <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> *@
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-
-
-
-    <!-- W sekcji head -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.21.0/font/bootstrap-icons.css">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-
-
-    <style>
-        /* body {
-                        font-family: 'Nunito Sans', sans-serif;
-                    } */
-
-        body {
-            padding-top: 56px;
-            margin: 0;
-        }
-
-        .navbar {
-            background-color: transparent;
-            border: none;
-            box-shadow: none;
-            transition: background-color 0.3s ease-in;
-            border-bottom: none !important;
-            height: 90px; /* Dodaj wysokość */
-        }
-
-            .navbar.navbar-solid {
-                background-color: white;
-            }
-
-        /* .navbar a.nav-link:hover {
-                        color: white !important;
-                    } */
-
-        .navbar-brand img {
-            max-height: 100%;
-            position: relative;
-            top: 0;
-            left: 0;
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .navbar.navbar-solid .navbar-brand img.logo {
-            opacity: 0;
-        }
-
-        .navbar.navbar-solid .navbar-brand img.logo-inv {
-            opacity: 1;
-        }
-
-        .navbar-brand img.logo-inv {
-            opacity: 0;
-        }
-
-        .nav-link-reservation {
-            color: white;
-            /* display: none; */
-        }
-
-        .nav-link-offers {
-            color: white;
-            /* display: none; */
-        }
-
-        .nav-link-login {
-            color: white;
-            /* display: none; */
-        }
-
-        .nav-link-account {
-            background: #fff;
-            color: #000;
-        }
-
-            .nav-link-account:hover {
-                background: gray;
-            }
-
-        .custom-split {
-            background: lightseagreen;
-            color: #fff;
-        }
-
-            .custom-split:hover,
-            .dropdown-menu.show {
-                background: darkseagreen; /* Kolor tła po najechaniu i w rozwiniętej liście */
-            }
-
-        .dropdown-item:hover {
-            background: darkseagreen;
-        }
-
-        .custom-list {
-            color: #fff;
-        }
-
-    </style>
+    <link rel="stylesheet" href="~/Car_reservation_system.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 </head>
-
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom  fixed-top navbar-transparent navbar-hover">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="FilterData" asp-action="Index">
-                    <img id="logoImage" src="~/Logo/Logoinv.png" alt="Logo" class="logo" style="max-height: 100%; max-width: 230px;" />
-                    @* <img src="~/Logo/Logoinv.png" alt="Logo Inv" class="logo-inv" style="max-height: 100%; max-width: 180px;" /> *@
-                </a>
+                <a class="navbar-brand" asp-area="Home" asp-controller="Home" asp-action="Index">Wypożyczalnia aut</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation" style="width: 10vw; padding: 0; height: auto;">
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 text-center">
-                        @* <li class="nav-item">
-                        <a class="nav-link btn btn-link text-white border-0 nav-link-padding" asp-area="" asp-controller="Cars" asp-action="Index" style="background-color: lightseagreen;">
-                        Pełna lista samochodów
-                        </a>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Home" asp-controller="Home" asp-action="Index">Strona główna</a>
                         </li>
-
-                        <li class="nav-item dropdown" style="background: linear-gradient(to bottom, #3498db, #2980b9); border-radius: 0.25rem;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #fff;">
-                        Panel klienta
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#" onclick="changePanel('client')">Panel klienta</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changePanel('seller')">Panel sprzedawcy</a></li>
-                        <!-- Dodaj inne elementy dropdown, jeśli są potrzebne -->
-                        </ul>
-                        </li> *@
-
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item dropdown" style="list-style: none;">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary btn-lg custom-split" style="background: lightseagreen; color: #fff; border: none;" onclick="redirectToPage()">
-                                        <span id="clientPanelText">Panel klienta</span>
-                                    </button>
-                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split custom-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: lightseagreen; border: none; color: #fff;">
-                                        <span class="visually-hidden">Toggle Dropdown</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-dark custom-split" aria-labelledby="navbarDarkDropdownMenuLink" style="background: linear-gradient(to bottom, #3498db, #2980b9);">
-                                        <li><a class="dropdown-item custom-list" href="/Cars/MyReservations" onclick="changePanelAndNavigate('client')">Panel klienta</a></li>
-                                        <li><a class="dropdown-item custom-list" href="/Cars/MyOffers" onclick="changePanelAndNavigate('seller')">Panel sprzedawcy</a></li>
-                                        <!-- Dodaj inne elementy dropdown, jeśli są potrzebne -->
-                                    </ul>
-
-                                </div>
-                            </li>
-                        }
-
-
-
-
-
-
-
-
-                        <!-- Dodaj inne elementy menu według potrzeb -->
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Home" asp-controller="Cars" asp-action="Index">Auta</a>
+                        </li>
                     </ul>
-                </div>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial.cshtml" />
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container" style="margin-top: 70px;">
-        @* Margines strony od góry 70 *@
-    </div>
     <div class="container">
         <main role="main" class="pb-3">
+            <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
 
-    <div class="container" style="margin-bottom: 70px;">
-        @* Margines strony od dołu *@
-    </div>
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-light bg-dark">
         <div class="container">
-            &copy; 2024 - AutoRent - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - CarRental - <a class="text-primary" asp-area="Home" asp-controller="Home" asp-action="Index">Home</a>
         </div>
     </footer>
-    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
-
-    <script>
-        var isCodeExecuted = false;
-        var userIsLoggedIn = @userIsLoggedIn.ToString().ToLower();
-
-        $(document).ready(function () {
-            var navbar = $(".navbar");
-            var navbarBrandImg = $(".navbar-brand img.logo");
-            var logoInvSrc = "/Logo/Logoinv.png";
-            var myReservationButton = $(".nav-link-reservation");
-            var splitButton = $(".custom-split");
-            var listButton = $(".custom-list");
-            var dropDownHover = $(".dropdown-item:hover");
-            var myReservationsNavItem = $(".nav-link-reservation");
-            var myOffersButton = $(".nav-link-offers");
-            var loginButton = $(".nav-link-login");
-            var accountButton = $(".nav-link-account");
-
-            // Odczytaj wybór panelu z pliku cookie przy ładowaniu strony
-            var panelType = getCookie("PanelType");
-            console.log(userIsLoggedIn);
-            // Ustaw odpowiedni panel na podstawie wyboru, tylko jeśli użytkownik jest zalogowany
-            if (panelType && userIsLoggedIn === true) {
-                console.log(userIsLoggedIn);
-                changePanelAndNavigate(panelType);
-            }
-
-
-            $(window).scroll(function () {
-                if ($(this).scrollTop() != 0) {
-
-                    navbar.addClass("navbar-solid");
-                    navbarBrandImg.css("opacity", 0);
-                    navbarBrandImg.attr("src", "/Logo/Logo.png");
-                    navbarBrandImg.css("opacity", 1);
-                    navbar.css("height", "70px");
-                    myReservationButton.css("color", "black");
-                    myOffersButton.css("color", "black");
-                    loginButton.css("color", "black");
-                    accountButton.css("color", "#fff");
-                    accountButton.css("background", "#292929");
-                    splitButton.css("background", "#EBECEF");
-                    splitButton.css("color", "black");
-                    dropDownHover.css("background", "black");
-                    listButton.css("color", "black");
-
-                } else {
-                    navbar.animate({ height: "90px" }, 200);
-                    navbar.removeClass("navbar-solid");
-                    navbarBrandImg.css("opacity", 1);
-                    navbarBrandImg.attr("src", "/Logo/Logoinv.png");
-                    myReservationButton.css("color", "white");
-                    myOffersButton.css("color", "white");
-                    loginButton.css("color", "white");
-                    accountButton.css("color", "#000");
-                    accountButton.css("background", "#E6E6E6");
-                    splitButton.css("background", "lightseagreen");
-                    splitButton.css("color", "#fff");
-                    dropDownHover.css("background", "black");
-                    listButton.css("color", "#fff");
-                }
-            });
-
-            navbar.hover(
-                function () {
-                    if (!navbar.hasClass("navbar-solid")) {
-                        navbar.addClass("navbar-solid");
-                        navbarBrandImg.css("opacity", 0);
-                        navbarBrandImg.attr("src", "/Logo/Logo.png");
-                        navbarBrandImg.css("opacity", 1);
-                        myReservationButton.css("color", "black");
-                        myOffersButton.css("color", "black");
-                        loginButton.css("color", "black");
-                        accountButton.css("color", "#fff");
-                        accountButton.css("background", "#292929");
-                        splitButton.css("background", "#EBECEF");
-                        splitButton.css("color", "black");
-                        dropDownHover.css("background", "black");
-                        listButton.css("color", "black");
-                    }
-                },
-                function () {
-                    if ($(window).scrollTop() <= 50) {
-                        navbar.removeClass("navbar-solid");
-                        navbarBrandImg.css("opacity", 1);
-                        navbarBrandImg.attr("src", "/Logo/Logoinv.png");
-                        myReservationButton.css("color", "white");
-                        myOffersButton.css("color", "white");
-                        loginButton.css("color", "white");
-                        accountButton.css("color", "#000");
-                        accountButton.css("background", "#E6E6E6");
-                        splitButton.css("background", "lightseagreen");
-                        splitButton.css("color", "#fff");
-                        dropDownHover.css("background", "black");
-                        listButton.css("color", "#fff");
-                    }
-                }
-            );
-        });
-
-        function getCookie(name) {
-            var value = "; " + document.cookie;
-            var parts = value.split("; " + name + "=");
-            if (parts.length == 2) return parts.pop().split(";").shift();
-        }
-
-        function changePanelAndNavigate(panelType) {
-            // console.log('Zmiana panelu na:', panelType);
-
-            toggleMyReservationsNavItem(panelType);
-
-            if (panelType == 'seller') {
-                document.getElementById('clientPanelText').innerText = "Panel sprzedawcy";
-            }
-
-            // Wysyła żądanie do akcji kontrolera ChangePanel
-            $.ajax({
-                url: '/Panel/ChangePanel',
-                type: 'POST',
-                data: { panelType: panelType },
-                success: function () {
-                    // Tutaj możesz obsłużyć sukces, jeśli to konieczne
-                    console.log('Zmiana panelu udana');
-                    // window.location.href = '/Cars/MyReservations';
-                },
-                error: function () {
-                    // Obsłuż błąd, jeśli to konieczne
-                    console.error('Błąd podczas zmiany panelu');
-                }
-            });
-
-        }
-
-        function toggleMyReservationsNavItem(panelType) {
-            var myReservationsNavItem = $(".nav-link-reservation")[0]; // Pobierz pierwszy element z obiektu jQuery
-            var myOffersNavItem = $(".nav-link-offers")[0];
-
-            if (panelType === 'client') {
-                myReservationsNavItem.style.display = 'block';  // Pokaż przycisk
-                myOffersNavItem.style.display = 'none';
-            } else if (panelType === 'seller') {
-                myReservationsNavItem.style.display = 'none';   // Ukryj przycisk
-                myOffersNavItem.style.display = 'block';
-            }
-        }
-
-        function redirectToPage() {
-            var panelType = getCookie("PanelType");
-
-            if (panelType == "seller") {
-                window.location.href = '/Cars/MyOffers';
-            } else if (panelType == "client") {
-                window.location.href = '/Cars/MyReservations';
-            }
-        }
-
-        document.querySelector('.btn-group').addEventListener('mouseenter', function () {
-            $('[data-bs-toggle="dropdown"]').dropdown('toggle');
-        });
-
-
-    </script>
-
-
-
 </body>
 </html>

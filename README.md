@@ -3,7 +3,7 @@
 
 ## Wymagania
 
-- .NET 6.0 SDK lub nowszy
+- .NET 8.0 SDK lub nowszy
 - Visual Studio 2022 lub nowszy
 - SQL Server (lub inna kompatybilna baza danych)
 - Przeglądarka internetowa

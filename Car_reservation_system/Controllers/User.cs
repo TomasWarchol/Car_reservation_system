@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
 
-namespace Car_reservation_system.Entities
+namespace Car_reservation_system.Controllers
 {
     public class User
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Car_reservation_system.Entities
+namespace Car_reservation_system.Controllers
 {
     public class RentCarInfo
     {

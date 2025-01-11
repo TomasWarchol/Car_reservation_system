@@ -1,4 +1,4 @@
-﻿using Car_reservation_system.Entities;
+﻿using Car_reservation_system.Controllers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Car_reservation_system

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Car_reservation_system.Entities;
+using Car_reservation_system.Controllers;
 using Car_reservation_system.Models;
 
 namespace Car_reservation_system

@@ -1,7 +1,7 @@
 ﻿using Car_reservation_system.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Car_reservation_system.Entities
+namespace Car_reservation_system.Controllers
 {
     public class CarRentalManagerContext : DbContext
     {

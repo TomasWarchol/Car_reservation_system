@@ -1,5 +1,5 @@
 using Car_reservation_system;
-using Car_reservation_system.Entities;
+using Car_reservation_system.Controllers;
 using Car_reservation_system.Middleware;
 using Car_reservation_system.Repositories;
 using Car_reservation_system.Repositories.IRepositories;

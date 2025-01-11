@@ -39,9 +39,11 @@ namespace Car_reservation_system
                 if(!_dbContext.Users.Any())
                 {
                     var admin = GetAdmin();
+                    var user = GetUser();
                     _dbContext.Users.Add(admin);
                     _dbContext.SaveChanges();
                 }
+
             }
         }
 
@@ -57,6 +59,20 @@ namespace Car_reservation_system
             };
             return admin;
         }
+
+        private User GetUser()
+        {
+            var user = new User()
+            {
+                FirstName = "tom",
+                LastName = "war",
+                Email = "222@op.pl",
+                PasswordHash = "AQAAAAIAAYagAAAAEESv8rvZdVtbAFJF4qDKT98TBAZDBLnleKFtBBAnqr+4yfvY3QfdZcDHLnnbGFNZKw==",
+                RoleId = 1
+            };
+            return user;
+        }
+
 
         private IEnumerable<Car> GetCars()
         {

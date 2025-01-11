@@ -8,9 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="ClientApp\**" />
+    <Compile Remove="Migrations - kopiować\**" />
+    <Compile Remove="Nowy folder\**" />
     <Content Remove="ClientApp\**" />
+    <Content Remove="Migrations - kopiować\**" />
+    <Content Remove="Nowy folder\**" />
     <EmbeddedResource Remove="ClientApp\**" />
+    <EmbeddedResource Remove="Migrations - kopiować\**" />
+    <EmbeddedResource Remove="Nowy folder\**" />
     <None Remove="ClientApp\**" />
+    <None Remove="Migrations - kopiować\**" />
+    <None Remove="Nowy folder\**" />
   </ItemGroup>
 
   <ItemGroup>
